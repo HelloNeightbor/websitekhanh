@@ -34,26 +34,23 @@ client.once("ready", async () => {
 
 app.get("/discord-status", async (req, res) => {
   const userId = req.query.user;
-
-  if (!userId || !guild) {
-    return res.status(400).json({ error: "Thiếu user ID hoặc guild chưa sẵn sàng" });
-  }
+  if (!userId) return res.status(400).json({ error: "Thiếu userId" });
 
   try {
-    const member = await guild.members.fetch(userId);
+    const guild = await client.guilds.fetch(GUILD_ID);
+    let member = guild.members.cache.get(userId);
+    if (!member) member = await guild.members.fetch(userId);
     const presence = member.presence;
-    const status = presence?.status || "offline";
-    const activity = presence?.activities?.[0]?.name || "Không hoạt động";
 
     res.json({
-      username: member.user.username + "#" + member.user.discriminator,
-      avatar: member.user.displayAvatarURL(),
-      status,
-      activity
+      username: member.user.username,
+      avatar: member.user.displayAvatarURL({ dynamic: true, size: 128 }),
+      status: presence?.status || "offline",
+      activity: presence?.activities?.[0]?.name || "Không hoạt động",
     });
   } catch (err) {
-    console.error("❌ Lỗi khi fetch member:", err);
-    res.status(500).json({ error: "Không tìm thấy user hoặc bot thiếu quyền" });
+    console.error("❌ Lỗi:", err);
+    res.status(500).json({ error: "Lỗi xử lý" });
   }
 });
 
