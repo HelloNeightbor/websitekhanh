@@ -58,17 +58,47 @@
 
     /* Profile Discord */
     .profile-container {
-      position: relative;
-      z-index: 1;
-      width: 320px;
-      margin: 120px auto;
-      background: rgba(0, 0, 0, 0.4);
-      border-radius: 20px;
-      padding: 20px;
-      text-align: center;
-      box-shadow: 0 0 15px rgba(255,255,255,0.15);
-    }
+  width: 320px;
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: 20px;
+  padding: 20px;
+  text-align: center;
+  box-shadow: 0 0 15px rgba(255,255,255,0.15);
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
+.avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 20px;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.username {
+  color: white;
+  font-size: 20px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.action-button {
+  background-color: #7289da;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.action-button:hover {
+  background-color: #5b6eae;
+  transform: scale(1.05);
+}
     .profile-container img {
       border-radius: 50%;
       border: 3px solid white;
@@ -197,16 +227,13 @@
     <h2 id="spotify-name">Khanhs Music 🎧</h2>
     <a href="https://open.spotify.com/user/316palvl2g7vrhxdms6vswrh5zji" target="_blank" class="join-button">Truy cập Spotify</a>
   </div>
-
+<div class="profile-container">
+  <img class="avatar" src="https://i.scdn.co/image/ab67616d0000b2731d3884533177ef173d093165" alt="Discord Server">
+  <h3 class="username">Centennial Genius ✦⋆</h3>
+  <a class="action-button" href="https://discord.gg/your-invite-link" target="_blank">Tham gia Discord</a>
+</div>
   <!-- Nhạc nền -->
   <audio id="music" src="music.mp3"></audio>
-<div class="server-container">
-  <img src="https://images-ext-1.discordapp.net/external/YN1kECEbCK6udjN6TGMj7WwkGIx9fLxdS0osgU4ZgBs/%3Fsize%3D4096/https/cdn.discordapp.com/icons/1310148207107379230/bce46dc8a5e371a895c81fc3a53f8b50.png?format=webp&quality=lossless&width=960&height=960" alt="Server Icon" class="server-icon">
-  <div class="server-info">
-    <h3 class="server-name">Centennial Genius ✮⋆˙</h3>
-    <a href="https://discord.gg/egYvvW2TUY" target="_blank" class="join-button">Tham gia Discord</a>
-  </div>
-</div>
 
   <script>
     // Typewriter effect
