@@ -246,7 +246,7 @@
     }
 
     function loadDiscordUser(userId, suffix) {
-fetch("https://your-app.onrender.com/discord-status?user=626404653139099648")
+fetch(`https://your-app.onrender.com/discord-status?user=${userId}`)
         .then(res => res.json())
         .then(data => {
           if (!data.username) {
