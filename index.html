@@ -236,41 +236,42 @@
 
 
     // Load Discord User
-    function getStatusClass(status) {
-      switch (status) {
-        case "online": return "online";
-        case "idle": return "idle";
-        case "dnd": return "dnd";
-        default: return "offline";
+function getStatusClass(status) {
+  switch (status) {
+    case "online": return "online";
+    case "idle": return "idle";
+    case "dnd": return "dnd";
+    default: return "offline";
+  }
+}
+
+function loadDiscordUser(userId, suffix) {
+  fetch(`https://your-app.onrender.com/discord-status?user=${userId}`)
+    .then(res => res.json())
+    .then(data => {
+      if (!data.username) {
+        document.getElementById(`username${suffix}`).textContent = "❌ Không tìm thấy user";
+        return;
       }
-    }
 
-    function loadDiscordUser(userId, suffix) {
-fetch(`https://your-app.onrender.com/discord-status?user=${userId}`)
-        .then(res => res.json())
-        .then(data => {
-          if (!data.username) {
-            document.getElementById(`username${suffix}`).textContent = "❌ Không tìm thấy user";
-            return;
-          }
+      document.getElementById(`avatar${suffix}`).src = data.avatar;
+      document.getElementById(`username${suffix}`).textContent = data.username;
 
-          document.getElementById(`avatar${suffix}`).src = data.avatar;
-          document.getElementById(`username${suffix}`).textContent = data.username;
+      const dotClass = getStatusClass(data.status);
+      document.getElementById(`status${suffix}`).innerHTML =
+        `<span class="status-dot ${dotClass}"></span> ${data.status}`;
 
-          const dotClass = getStatusClass(data.status);
-          document.getElementById(`status${suffix}`).innerHTML =
-            `<span class="status-dot ${dotClass}"></span> ${data.status}`;
+      document.getElementById(`activity${suffix}`).textContent = `🎮 ${data.activity}`;
+    })
+    .catch(err => {
+      console.error("❌ Lỗi khi lấy dữ liệu:", err);
+      document.getElementById(`discord-profile-${suffix}`).innerHTML =
+        `<p>❌ Không thể tải thông tin người dùng.</p>`;
+    });
+}
 
-          document.getElementById(`activity${suffix}`).textContent = `🎮 ${data.activity}`;
-        })
-        .catch(err => {
-          console.error("❌ Lỗi khi lấy dữ liệu:", err);
-          document.getElementById(`discord-profile-${suffix}`).innerHTML =
-            `<p>❌ Không thể tải thông tin người dùng.</p>`;
-        });
-    }
-
-    loadDiscordUser("767688473385500672", "1");
+// Gọi đúng user cần
+loadDiscordUser("767688473385500672", "1");
   </script>
 
 </body>
