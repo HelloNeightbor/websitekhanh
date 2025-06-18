@@ -246,7 +246,7 @@ function getStatusClass(status) {
 }
 
 function loadDiscordUser(userId, suffix) {
-  fetch(`https://your-app.onrender.com/discord-status?user=${userId}`)
+  fetch(`https://websitekhanh.onrender.com/discord-status?user=${userId}`)
     .then(res => res.json())
     .then(data => {
       if (!data.username) {
@@ -270,8 +270,8 @@ function loadDiscordUser(userId, suffix) {
     });
 }
 
-// Gọi đúng user cần
 loadDiscordUser("767688473385500672", "1");
+
   </script>
 
 </body>
